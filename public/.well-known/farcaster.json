@@ -6,34 +6,26 @@
   },
   "miniapp": {
     "version": "1",
-    "name": "TheRektRunner",
+    "name": "Rekt Runner",
     "homeUrl": "https://rekt-runner.vercel.app/",
     "iconUrl": "https://rekt-runner.vercel.app/assets/icon.png",
-    "imageUrl": "https://rekt-runner.vercel.app/assets/embed-3x2.png",
-
     "splashImageUrl": "https://rekt-runner.vercel.app/assets/splash.png",
-    "splashBackgroundColor": "#000000",
-
-    "buttonTitle": "Play",
-    "subtitle": "Run the chart. Dodge the rekt.",
-    "description": "An infinite runner inside a trading chart where terrain reacts to volatility. Run as a pixel Bull, dodge Bear Traps, collect Green Candles.",
+    "splashBackgroundColor": "#020617",
+    "subtitle": "Mine blocks by walking.",
+    "description": "A hardware-wallet-themed proof-of-walk mini app: start a walk session, generate kinetic hashrate, and mine your daily block.",
     "primaryCategory": "games",
-    "tags": ["game", "base", "farcaster", "miniapp", "degen"],
-
-    "heroImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
-    "ogTitle": "TheRektRunner",
-    "ogDescription": "An infinite runner inside a trading chart where terrain reacts to volatility. Run as a pixel Bull, dodge Bear Traps, collect Green Candles.",
-    "ogImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
-    "screenshotUrls": ["https://rekt-runner.vercel.app/assets/hero.png"],
-
-    "actions": [
-      {
-        "name": "Play",
-        "type": "launch_frame",
-        "url": "https://rekt-runner.vercel.app/"
-      }
+    "tags": [
+      "fun",
+      "simple",
+      "utility"
     ],
-
+    "heroImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
+    "ogTitle": "Kinetik",
+    "ogDescription": "A hardware-wallet-themed proof-of-walk mini app: start a walk session, generate kinetic hashrate, and mine your daily block.",
+    "ogImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
+    "screenshotUrls": [
+      "https://rekt-runner.vercel.app/assets/hero.png"
+    ],
     "noindex": true
   }
 }
