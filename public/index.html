@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>The Rekt Runner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta name="fc:miniapp" content="{&quot;version&quot;:&quot;1&quot;,&quot;imageUrl&quot;:&quot;https://thererkt-runner.xyz/assets/embed-3x2.png&quot;,&quot;button&quot;:{&quot;title&quot;:&quot;Run&quot;,&quot;action&quot;:{&quot;type&quot;:&quot;launch_frame&quot;,&quot;url&quot;:&quot;https://thererkt-runner.xyz/&quot;}},&quot;splashImageUrl&quot;:&quot;https://thererkt-runner.xyz/assets/splash.png&quot;,&quot;splashBackgroundColor&quot;:&quot;#020617&quot;,&quot;name&quot;:&quot;TheRektRunner&quot;}" />
+  <meta name="fc:frame" content="vNext" />
+
+  <meta property="og:title" content="The Rekt Runner" />
+  <meta property="og:description" content="A tactile runner inside a trading chart. Volatility becomes terrain—tap to jump, dodge bear traps, grab green candles." />
+  <meta property="og:image" content="https://thererkt-runner.xyz/assets/hero.png" />
+
+  <style>
+    :root {
+      --bg:#020617;
+      --grid:rgba(52,211,255,0.08);
+      --lime:#a3ff12;
+      --cyan:#34d3ff;
+      --danger:#ff2e88;
+      --panel:rgba(2,6,23,0.78);
+      --stroke:rgba(163,255,18,0.22);
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; margin:0; background:var(--bg); color:var(--lime);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      overflow:hidden;
+    }
+    #wrap{ position:fixed; inset:0; }
+    #canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:manipulation; }
+    #hud{ position:absolute; inset:0; pointer-events:none; }
+    #top{ position:absolute; left:12px; right:12px; top:10px; display:flex; justify-content:space-between; gap:10px; }
+    .chip{ background:var(--panel); border:1px solid var(--stroke); border-radius:16px; padding:10px 12px; }
+    .sub{ color:rgba(52,211,255,0.88); font-size:12px; margin-top:4px; }
+    #controls{ position:absolute; left:12px; right:12px; bottom:12px; display:flex; gap:10px; align-items:center; pointer-events:none; }
+    .hint{ flex:1; background:var(--panel); border:1px dashed rgba(163,255,18,0.25); border-radius:16px; padding:12px 14px; color:rgba(52,211,255,0.85); font-size:12px; line-height:1.25; }
+    .btn{ pointer-events:auto; border:none; border-radius:16px; padding:12px 14px; font-weight:900; letter-spacing:0.3px; }
+    .btn.primary{ background:linear-gradient(180deg, rgba(163,255,18,0.95), rgba(95,180,0,0.95)); color:#07110a; }
+    .btn.ghost{ background:var(--panel); color:var(--lime); border:1px solid var(--stroke); }
+
+    /* Bottom sheet */
+    #sheetBack{ position:fixed; inset:0; background:rgba(0,0,0,0.62); opacity:0; pointer-events:none; transition:opacity .22s ease; }
+    #sheet{ position:fixed; left:0; right:0; bottom:-520px; background:rgba(2,6,23,0.92);
+      border-top:1px solid rgba(163,255,18,0.18); border-top-left-radius:22px; border-top-right-radius:22px;
+      padding:14px 14px 16px; transition:transform .28s cubic-bezier(.2,.9,.2,1); transform:translateY(0);
+      box-shadow: 0 -20px 60px rgba(0,0,0,0.7);
+    }
+    #sheet.open{ transform:translateY(-520px); }
+    #sheetBack.open{ opacity:1; pointer-events:auto; }
+
+    .sheetHead{ display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .x{ border:1px solid rgba(163,255,18,0.22); background:transparent; color:var(--lime); border-radius:14px; padding:8px 10px; pointer-events:auto; }
+    .row{ display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; }
+    .pill{ border:1px solid rgba(163,255,18,0.22); background:rgba(163,255,18,0.06); color:var(--lime); padding:10px 12px; border-radius:16px; font-weight:900; pointer-events:auto; }
+    .pill.active{ background:rgba(163,255,18,0.18); }
+    input{ flex:1; border-radius:16px; border:1px solid rgba(163,255,18,0.22); background:rgba(0,0,0,0.35); color:var(--lime); padding:12px 12px; outline:none; pointer-events:auto; }
+    .cta{ width:100%; margin-top:12px; border:none; border-radius:18px; padding:14px 14px; font-weight:1000; letter-spacing:0.3px; pointer-events:auto; }
+    .cta.ok{ background:linear-gradient(180deg, rgba(163,255,18,0.95), rgba(95,180,0,0.95)); color:#07110a; }
+    .cta.disabled{ background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6); }
+    .fine{ margin-top:10px; color:rgba(52,211,255,0.78); font-size:12px; line-height:1.35; }
+    .toast{ position:fixed; left:50%; bottom:96px; transform:translateX(-50%) translateY(14px);
+      background:rgba(2,6,23,0.92); border:1px solid rgba(163,255,18,0.18); color:rgba(52,211,255,0.9);
+      padding:10px 12px; border-radius:16px; opacity:0; transition:opacity .18s ease, transform .18s ease;
+      pointer-events:none; max-width:min(520px, calc(100vw - 24px)); text-align:center;
+    }
+    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+    .bar{ height:8px; border-radius:999px; background:rgba(52,211,255,0.10); overflow:hidden; margin-top:10px; border:1px solid rgba(163,255,18,0.18); }
+    .bar > i{ display:block; height:100%; width:0%; background:rgba(163,255,18,0.85); }
+
+    /* Start overlay */
+    #startOverlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+    .card{ width:min(520px, calc(100vw - 28px)); background:rgba(2,6,23,0.78); border:1px solid rgba(163,255,18,0.22);
+      border-radius:22px; padding:16px; box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+    }
+    .card h1{ margin:0 0 6px 0; font-size:18px; letter-spacing:0.4px; }
+    .card p{ margin:0; color:rgba(52,211,255,0.85); font-size:13px; line-height:1.35; }
+    .kbd{ display:inline-block; border:1px solid rgba(163,255,18,0.25); border-bottom-width:2px; border-radius:10px; padding:2px 8px; color:var(--lime); }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="canvas"></canvas>
+
+    <div id="hud">
+      <div id="top">
+        <div class="chip">
+          <div><strong>TheRektRunner</strong></div>
+          <div id="mode" class="sub">Detecting…</div>
+        </div>
+        <div class="chip">
+          <div style="font-size:12px;color:rgba(52,211,255,0.88)">Unrealized PnL</div>
+          <div><strong id="pnlVal">+$0.00</strong></div>
+        </div>
+      </div>
+
+      <div id="controls">
+        <div class="hint">
+          <strong>Tap</strong> = jump. <span style="color:var(--danger)">Magenta dumps</span> drop the floor. <span style="color:var(--lime)">Lime candles</span> boost.
+        </div>
+        <button id="tipBtn" class="btn ghost">Tip</button>
+        <button id="restartBtn" class="btn primary">Restart</button>
+      </div>
+    </div>
+
+    <div id="startOverlay">
+      <div class="card">
+        <h1>Tap to start</h1>
+        <p>
+          You’re running on a chart. The floor is the price line.
+          <br/>Tap to jump. Grab lime candles for boost. Avoid bear traps.
+          <br/><span class="kbd">Tap</span> or <span class="kbd">Space</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="sheetBack"></div>
+  <div id="sheet" aria-hidden="true">
+    <div class="sheetHead">
+      <div>
+        <div style="font-weight:900">Tip with USDC (Base)</div>
+        <div class="sub">Fuel the runner 🟩</div>
+      </div>
+      <button class="x" id="closeSheet">✕</button>
+    </div>
+
+    <div class="row" id="presetRow">
+      <button class="pill" data-amt="1">$1</button>
+      <button class="pill" data-amt="5">$5</button>
+      <button class="pill" data-amt="10">$10</button>
+      <button class="pill" data-amt="25">$25</button>
+    </div>
+
+    <div class="row" style="margin-top:12px;">
+      <input id="customAmt" inputmode="decimal" placeholder="Custom amount (e.g. 3.50)" />
+      <button class="pill" id="useCustom">Use</button>
+    </div>
+
+    <button id="sendBtn" class="cta ok">Send USDC</button>
+    <div class="bar" id="prepBar" style="display:none;"><i></i></div>
+
+    <div class="fine">If RECIPIENT or BUILDER_CODE is still TODO, sending is disabled.</div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="./script.js"></script>
+  <script src="./TheRektRunner-ui.js"></script>
+</body>
+</html>
