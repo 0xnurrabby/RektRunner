@@ -5,8 +5,8 @@ import { Attribution } from "https://esm.sh/ox/erc8021";
 const USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const USDC_DECIMALS = 6;
 
-const BUILDER_CODE = "TODO_REPLACE_BUILDER_CODE"; // base.dev -> Settings -> Builder Code
-const RECIPIENT = "0x0000000000000000000000000000000000000000"; // TODO: replace with your tip recipient address (EVM)
+const BUILDER_CODE = "bc_4pl9badj"; // base.dev -> Settings -> Builder Code
+const RECIPIENT = "0x5eC6AF0798b25C563B102d3469971f1a8d598121"; // TODO: replace with your tip recipient address (EVM)
 
 const BASE_MAINNET = "0x2105";
 const BASE_SEPOLIA = "0x14a34";
