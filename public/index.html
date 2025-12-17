@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://nurrabby.com/assets/embed-3x2.png","button":{"title":"Play","action":{"type":"launch_frame","url":"https://nurrabby.com/"}}}'>
+<meta name="fc:frame" content='{"version":"vNext","imageUrl":"https://nurrabby.com/assets/embed-3x2.png","button":{"title":"Play","action":{"type":"launch_frame","url":"https://nurrabby.com/"}}}'>
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>The Rekt Runner</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <div id="hud">
+      <div id="hudLeft">
+        <div class="hudLabel">UNREALIZED PnL</div>
+        <div id="pnl" class="hudValue">+$0.00</div>
+      </div>
+      <div id="hudRight">
+        <div class="hudLabel">SPEED</div>
+        <div id="spd" class="hudValue">1.00x</div>
+      </div>
+    </div>
+
+    <canvas id="game" aria-label="The Rekt Runner"></canvas>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <button id="tipBtn" class="tipBtn" type="button">Tip</button>
+    <div id="tipModal" class="modal" hidden></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
