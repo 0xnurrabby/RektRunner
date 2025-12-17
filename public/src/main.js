@@ -16,16 +16,17 @@ function toast(msg){
 async function detectionGate(){
   // 1) farcaster manifest existence + homeUrl match + imageUrl requirement
   try{
+  
     const res = await fetch("/.well-known/farcaster.json", { cache:"no-store" });
     if(!res.ok) throw new Error("Missing /.well-known/farcaster.json");
     const j = await res.json();
-    if(j.homeUrl !== "https://nurrabby.com/") throw new Error("homeUrl mismatch");
+    if(j.homeUrl !== "https://rekt-runner.vercel.app/") throw new Error("homeUrl mismatch");
     if(!j.imageUrl || !String(j.imageUrl).endsWith("/assets/embed-3x2.png")) throw new Error("miniapp.imageUrl missing/incorrect");
   }catch(e){
     // If this fails, user likely deployed wrong. Show hard error.
     document.body.innerHTML = `<div style="padding:18px;color:#00ff88;font-family:monospace">
       <div style="font-weight:800;margin-bottom:8px">Mini App detection FAILED</div>
-      <div style="opacity:.9">Fix: ensure /.well-known/farcaster.json exists and matches https://nurrabby.com/ exactly.</div>
+      <div style="opacity:.9">Fix: ensure /.well-known/farcaster.json exists and matches https://rekt-runner.vercel.app/ exactly.</div>
       <div style="opacity:.7;margin-top:10px">Details: ${String(e.message||e)}</div>
     </div>`;
     throw e;
