@@ -1,0 +1,34 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjE0MTU3NzUsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhDYTZjMERBNDRFMjBCMkYwMUY5YTYwYjE0RjkzNTE3NUQ1NkU5MWNBIn0",
+    "payload": "eyJkb21haW4iOiJyZWt0LXJ1bm5lci52ZXJjZWwuYXBwIn0",
+    "signature": "2buUBnYKLREJPN2Y1tw0YbAJyG2ZRpGZEVJcY1WEBGYKkcLA24Ck8MRvfClBwqO3at2JxezYewOP7coVuxPU0hw="
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "RektRunner",
+    "homeUrl": "https://rekt-runner.vercel.app/",
+    "iconUrl": "https://rekt-runner.vercel.app/assets/icon.png",
+    "imageUrl": "https://rekt-runner.vercel.app/assets/embed-3x2.png",
+    "splashImageUrl": "https://rekt-runner.vercel.app/assets/splash.png",
+    "splashBackgroundColor": "#020617",
+    "buttonTitle": "Play",
+    "subtitle": "Run the chart. Dodge the rekt.",
+    "description": "An infinite runner inside a trading chart where terrain reacts to volatility. Run as a pixel Bull, dodge Bear Traps, collect Green Candles.",
+    "primaryCategory": "games",
+    "tags": ["game", "base", "farcaster", "miniapp", "degen"],
+    "heroImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
+    "ogTitle": "RektRunner",
+    "ogDescription": "An infinite runner inside a trading chart where terrain reacts to volatility. Run as a pixel Bull, dodge Bear Traps, collect Green Candles.",
+    "ogImageUrl": "https://rekt-runner.vercel.app/assets/hero.png",
+    "screenshotUrls": ["https://rekt-runner.vercel.app/assets/hero.png"],
+    "actions": [
+      {
+        "name": "Play",
+        "type": "launch_frame",
+        "url": "https://rekt-runner.vercel.app/"
+      }
+    ],
+    "noindex": true
+  }
+}
