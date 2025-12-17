@@ -1,0 +1,25 @@
+{
+  "version": "1",
+  "name": "The Rekt Runner",
+  "homeUrl": "https://nurrabby.com/",
+  "iconUrl": "https://nurrabby.com/assets/icon.png",
+  "imageUrl": "https://nurrabby.com/assets/embed-3x2.png",
+  "description": "An infinite runner inside a trading chart where terrain reacts to volatility. Run as a pixel Bull, dodge Bear Traps, collect Green Candles.",
+  "tags": [
+    "game",
+    "base",
+    "farcaster",
+    "miniapp",
+    "degen"
+  ],
+  "miniapp": {
+    "type": "frame",
+    "actions": [
+      {
+        "name": "Play",
+        "type": "launch_frame",
+        "url": "https://nurrabby.com/"
+      }
+    ]
+  }
+}
