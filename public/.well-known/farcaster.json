@@ -1,0 +1,31 @@
+{
+  "accountAssociation": {
+    "header": "TODO_REPLACE_BASE64_HEADER",
+    "payload": "TODO_REPLACE_BASE64_PAYLOAD",
+    "signature": "TODO_REPLACE_BASE64_SIGNATURE"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "TheRektRunner",
+    "homeUrl": "https://thererkt-runner.xyz/",
+    "iconUrl": "https://thererkt-runner.xyz/assets/icon.png",
+    "splashImageUrl": "https://thererkt-runner.xyz/assets/splash.png",
+    "splashBackgroundColor": "#020617",
+    "subtitle": "Run the volatility.",
+    "description": "A tactile runner inside a trading chart. Volatility becomes terrain\u2014tap to jump, dodge bear traps, grab green candles.",
+    "primaryCategory": "Games",
+    "tags": [
+      "fun",
+      "simple",
+      "utility"
+    ],
+    "heroImageUrl": "https://thererkt-runner.xyz/assets/hero.png",
+    "ogTitle": "TheRektRunner",
+    "ogDescription": "A tactile runner inside a trading chart. Volatility becomes terrain\u2014tap to jump, dodge bear traps, grab green candles.",
+    "ogImageUrl": "https://thererkt-runner.xyz/assets/hero.png",
+    "screenshotUrls": [
+      "https://thererkt-runner.xyz/assets/hero.png"
+    ],
+    "noindex": true
+  }
+}
