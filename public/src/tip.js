@@ -1,7 +1,7 @@
 import { Attribution } from "https://esm.sh/ox/erc8021";
 
-const BUILDER_CODE = "TODO_REPLACE_BUILDER_CODE";
-const RECIPIENT = "0x0000000000000000000000000000000000000000";
+const BUILDER_CODE = "bc_4pl9badj";
+const RECIPIENT = "0x5eC6AF0798b25C563B102d3469971f1a8d598121";
 
 const USDC_CONTRACT = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const USDC_DECIMALS = 6;
@@ -19,7 +19,7 @@ function isDisabled(){
   // Disable if builder code still TODO or recipient zero/invalid
   if(!BUILDER_CODE || BUILDER_CODE === "TODO_REPLACE_BUILDER_CODE") return true;
   if(!isProbablyValidAddress(RECIPIENT)) return true;
-  if(RECIPIENT.toLowerCase() === "0x0000000000000000000000000000000000000000") return true;
+  if(RECIPIENT.toLowerCase() === "0x5eC6AF0798b25C563B102d3469971f1a8d598121") return true;
   return false;
 }
 
