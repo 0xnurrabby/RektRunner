@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>The Rekt Runner</title>
+
+    <!-- Farcaster Mini App Embed (MUST be valid JSON, single line, wrapped in single quotes) -->
+    <meta name="fc:miniapp" content='{"version":"1","imageUrl":"https://rekt-runner.vercel.app/assets/embed-3x2.png","button":{"title":"Play The Rekt Runner","action":{"type":"launch_frame","name":"The Rekt Runner","url":"https://rekt-runner.vercel.app/","splashImageUrl":"https://rekt-runner.vercel.app/splash.png","splashBackgroundColor":"#000000"}}}' />
+    <meta name="fc:frame" content='{"version":"1","imageUrl":"https://rekt-runner.vercel.app/assets/embed-3x2.png","button":{"title":"Play The Rekt Runner","action":{"type":"launch_frame","name":"The Rekt Runner","url":"https://rekt-runner.vercel.app/","splashImageUrl":"https://rekt-runner.vercel.app/splash.png","splashBackgroundColor":"#000000"}}}' />
+
+    <!-- OpenGraph for non-Farcaster link previews -->
+    <meta property="og:title" content="The Rekt Runner" />
+    <meta property="og:description" content="Run the chart. Dodge red candles. Stack green momentum. Chase unrealized PnL." />
+    <meta property="og:image" content="https://rekt-runner.vercel.app/assets/embed-3x2.png" />
+    <meta property="og:url" content="https://rekt-runner.vercel.app/" />
+    <meta name="theme-color" content="#000000" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
