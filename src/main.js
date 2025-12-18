@@ -17,8 +17,8 @@ const USDC_CONTRACT = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // Base main
 const USDC_DECIMALS = 6;
 
 // IMPORTANT: replace in production
-const RECIPIENT = "0x0000000000000000000000000000000000000000"; // disabled if zero-address
-const BUILDER_CODE = "TODO_REPLACE_BUILDER_CODE";
+const RECIPIENT = "0x5eC6AF0798b25C563B102d3469971f1a8d598121"; // disabled if zero-address
+const BUILDER_CODE = "bc_4pl9badj";
 
 function isZeroAddress(addr) {
   return /^0x0{40}$/i.test(addr);
